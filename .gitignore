@@ -55,8 +55,7 @@ coverage.xml
 docs/_build/
 
 # PyBuilder
-<<<<<<< HEAD
 target/
-=======
-target/
->>>>>>> d5462f9d16fee01a39fb2c4a33a3943e6f1b1f64
+
+# Development DB
+*.sqlite3
