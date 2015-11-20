@@ -21,12 +21,19 @@ $(document).ready(function() {
     });
 
     var ItemsView = Backbone.View.extend({
-        el: '.table-body',
+        el: '.table-container',
+        template: _.template($('#shopping-list').html()),
 
         initialize: function() {
             this.listenTo(this.collection, 'sync', this.render);
+
         },
         render: function() {
+            if(this.collection.models.length > 0) {
+                var html = this.template();
+                this.$el.html(html);
+            }
+            
             var $list = this.$('tr.table-item').empty();
 
             this.collection.each(function(model) {
