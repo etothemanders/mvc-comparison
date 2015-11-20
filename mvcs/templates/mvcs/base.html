@@ -1,0 +1,17 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block title %}
+            <title>Base</title>
+        {% endblock %}
+        <script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+        {% block js %}
+        {% endblock %}
+    </head>
+    <body>
+        {% block content %}
+            <h1>Hello!</h1>
+        {% endblock %}
+    </body>
+</html>
