@@ -35,6 +35,20 @@ $(document).ready(function() {
             this.$el.html(html);
             return this;
         },
+        getCookie: function(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = $.trim(cookies[i]);
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        },
         onAdd: function(event) {
             event.preventDefault();
             var itemName = $('#itemName').val();
@@ -42,6 +56,7 @@ $(document).ready(function() {
             $.ajax({
                 url: items.url,
                 method: 'POST',
+                headers: {'X-CSRFToken': this.getCookie('csrftoken')},
                 data: {
                     'name': itemName,
                     'quantity': itemQuantity

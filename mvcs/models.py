@@ -8,3 +8,6 @@ class Item(models.Model):
 
     def __str__(self):
         return '{id} {name} {qty} purchased={purchased}'.format(id=self.pk, name=self.name, qty=self.quantity, purchased=self.purchased)
+
+    def add(self):
+        self.save()

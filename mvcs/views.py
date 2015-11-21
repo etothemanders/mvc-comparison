@@ -1,8 +1,11 @@
 from django.shortcuts import render
+from django.template.context_processors import csrf
 
 
 def index(request):
     return render(request, 'mvcs/index.html', {})
 
 def backbone(request):
-    return render(request, 'mvcs/backbone.html', {})
+    context = {}
+    context.update(csrf(request))
+    return render(request, 'mvcs/backbone.html', context)
