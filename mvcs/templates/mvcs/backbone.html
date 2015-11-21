@@ -10,17 +10,7 @@
 
 {% block content %}
     <h1>Backbone Shopping List</h1>
-    <form class="form-inline">
-        <div class="form-group">
-            <label for="itemName">Item</label>
-            <input type="text" class="form-control" id="itemName" placeholder="eggs">
-        </div>
-        <div class="form-group">
-            <label for="itemQuantity">Quantity</label>
-            <input type="text" class="form-control" id="itemQuantity" placeholder="12">
-        </div>
-        <button type="submit" class="btn btn-default" id="addItemBtn">Add</button>
-    </form>
+    <div class="form-container"></div>
     <div class="table-container"></div>
     {% include 'mvcs/backbone_templates/backbone_templates.html' %}
 {% endblock %}

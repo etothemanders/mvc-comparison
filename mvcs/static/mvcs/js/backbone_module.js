@@ -20,6 +20,42 @@ $(document).ready(function() {
         }
     });
 
+    var FormView = Backbone.View.extend({
+        el: '.form-container',
+        template: _.template($('#shopping-list-form').html()),
+        events: {
+            'click #addItemBtn': 'onAdd'
+        },
+
+        initialize: function() {
+            this.render();
+        },
+        render: function() {
+            var html = this.template();
+            this.$el.html(html);
+            return this;
+        },
+        onAdd: function(event) {
+            event.preventDefault();
+            var itemName = $('#itemName').val();
+            var itemQuantity = $('#itemQuantity').val();
+            $.ajax({
+                url: items.url,
+                method: 'POST',
+                data: {
+                    'name': itemName,
+                    'quantity': itemQuantity
+                },
+                error: function(err) {
+                    console.log('Error status: ' + err.status + ' statusText: ' + err.statusText);
+                },
+                success: function(resp) {
+                    console.log(resp);
+                }
+            });
+        }
+    });
+
     var ItemsView = Backbone.View.extend({
         el: '.table-container',
         template: _.template($('#shopping-list').html()),
@@ -33,7 +69,7 @@ $(document).ready(function() {
                 var html = this.template();
                 this.$el.html(html);
             }
-            
+
             var $list = this.$('tr.table-item').empty();
 
             this.collection.each(function(model) {
@@ -57,6 +93,7 @@ $(document).ready(function() {
 
     });
 
+    var form = new FormView();
     var items = new ItemCollection();
     var itemsView = new ItemsView({collection: items});
 });
