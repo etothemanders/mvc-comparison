@@ -85,11 +85,12 @@ $(document).ready(function() {
                 this.$el.html(html);
             }
 
-            var $list = this.$('tr.table-item').empty();
+            var $tableBody = $('.table-body');
+            $tableBody.empty();
 
             this.collection.each(function(model) {
                 var itemView = new ItemView({model: model});
-                $list.append(itemView.render().$el);
+                $tableBody.append(itemView.$el);
             }, this);
 
             return this;
@@ -97,9 +98,14 @@ $(document).ready(function() {
     });
 
     var ItemView = Backbone.View.extend({
-        el: 'tr.table-item',
+        tagName: 'tr',
+        className: 'table-item',
         template: _.template($('#item-tmpl').html()),
 
+        initialize: function() {
+            this.listenTo(this.model, 'sync change', this.render);
+            this.render();
+        },
         render: function() {
             var html = this.template(this.model.toJSON());
             this.$el.html(html);
