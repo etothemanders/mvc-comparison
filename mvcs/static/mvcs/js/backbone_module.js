@@ -102,15 +102,24 @@ $(document).ready(function() {
         tagName: 'tr',
         className: 'table-item',
         template: _.template($('#item-tmpl').html()),
+        events: {
+            'click .item-delete': 'onDelete'
+        },
 
         initialize: function() {
             this.listenTo(this.model, 'sync change', this.render);
+            this.listenTo(this.model, 'destroy', this.remove);
             this.render();
         },
         render: function() {
             var html = this.template(this.model.toJSON());
             this.$el.html(html);
             return this;
+        },
+        onDelete: function(event) {
+            this.model.destroy({
+                headers: {'X-CSRFToken': form.getCookie('csrftoken')}
+            });
         }
 
     });
