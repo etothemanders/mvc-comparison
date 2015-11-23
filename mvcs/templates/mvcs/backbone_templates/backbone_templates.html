@@ -13,12 +13,13 @@
 </script>
 
 <script type="text/template" id="shopping-list">
-    <table>
+    <table border="1">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Item</th>
                     <th>Quantity</th>
-                    <th>Purchased?</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody class="table-body">
@@ -27,7 +28,8 @@
 </script>
 
 <script type="text/template" id="item-tmpl">
+    <td><input type="checkbox"</td>
     <td><%= name %></td>
     <td><%= quantity %></td>
-    <td><%= purchased %></td>
+    <td class="item-delete">X</td>
 </script>
