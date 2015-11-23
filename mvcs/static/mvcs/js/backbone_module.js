@@ -5,6 +5,15 @@ $(document).ready(function() {
             name: null,
             quantity: null,
             purchased:  null
+        },
+
+        toggle: function() {
+            this.save({
+                purchased: !this.get('purchased')
+            },
+            {
+                headers: {'X-CSRFToken': form.getCookie('csrftoken')},
+            });
         }
     });
 
@@ -51,6 +60,7 @@ $(document).ready(function() {
         },
         onAdd: function(event) {
             event.preventDefault();
+            var self = this;
             var itemName = $('#itemName').val();
             var itemQuantity = $('#itemQuantity').val();
             $.ajax({
@@ -67,6 +77,7 @@ $(document).ready(function() {
                 success: function(resp) {
                     console.log(resp);
                     items.fetch();
+                    self.render();
                 }
             });
         }
@@ -103,7 +114,8 @@ $(document).ready(function() {
         className: 'table-item',
         template: _.template($('#item-tmpl').html()),
         events: {
-            'click .item-delete': 'onDelete'
+            'click .item-delete': 'onDelete',
+            'click .item-purchase': 'togglePurchased'
         },
 
         initialize: function() {
@@ -114,14 +126,24 @@ $(document).ready(function() {
         render: function() {
             var html = this.template(this.model.toJSON());
             this.$el.html(html);
+            this.$el.find('input.item-purchase').toggleClass('checked', this.model.get('purchased'));
             return this;
         },
         onDelete: function(event) {
             this.model.destroy({
                 headers: {'X-CSRFToken': form.getCookie('csrftoken')}
             });
+        },
+        togglePurchased: function(event) {
+            this.model.toggle();
+            // var currentState = this.model.get('purchased');
+            // var toggleMap = {
+            //     false: true,
+            //     true: false
+            // }
+            // var newState = toggleMap[currentState];
+            // this.model.set({'purchased': newState});
         }
-
     });
 
     var form = new FormView();
