@@ -14,9 +14,25 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Backbone Shopping List</h1>
-    <div class="error-msg-container"></div>
-    <div class="form-container"></div>
-    <div class="table-container"></div>
+    <div class="row header">
+        <div class="col-xs-12">
+            <h1>Backbone Shopping List</h1>
+        </div>
+    </div>
+    <div class="row errors">
+        <div class="col-xs-12">
+            <div class="error-msg-container"></div>
+        </div>
+    </div>
+    <div class="row form">
+        <div class="col-xs-12">
+            <div class="form-container"></div>
+        </div>
+    </div>
+    <div class="row table-list">
+        <div class="col-xs-12">
+            <div class="table-container table-responsive"></div>
+        </div>
+    </div>
     {% include 'mvcs/backbone_templates/backbone_templates.html' %}
 {% endblock %}

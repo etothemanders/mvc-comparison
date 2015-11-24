@@ -1,3 +1,33 @@
+.header,
+.table-list {
+    margin-bottom: 50px;
+}
+
 h1 {
     text-align: center;
+}
+
+.form {
+    margin-bottom: 30px;
+}
+
+.form-container,
+.table-container {
+    margin: auto;
+}
+
+.form-container {
+    max-width: 500px;
+}
+
+.table-container {
+    max-width: 768px;
+}
+
+td.item-delete {
+    text-align: center;
+}
+
+td.item-delete:hover {
+    cursor: pointer;
 }
