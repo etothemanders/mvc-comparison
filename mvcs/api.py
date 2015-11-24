@@ -1,6 +1,6 @@
 import simplejson
 
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import JsonResponse
 
 from models import Item
 
@@ -10,7 +10,6 @@ def items(request, item_id=None):
         data = request.POST
         item = Item(name=data.get('name'), quantity=data.get('quantity'))
         item.add()
-        return HttpResponseRedirect('items/')
     if request.method == 'DELETE':
         item = Item.objects.get(pk=item_id)
         item.delete()
