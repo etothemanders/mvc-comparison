@@ -60,25 +60,48 @@ $(document).ready(function() {
         },
         onAdd: function(event) {
             event.preventDefault();
+            $('.error-msg-container').empty();
+
             var self = this;
             var itemName = $('#itemName').val();
             var itemQuantity = $('#itemQuantity').val();
-            $.ajax({
-                url: items.url,
-                method: 'POST',
-                headers: {'X-CSRFToken': this.getCookie('csrftoken')},
-                data: {
-                    'name': itemName,
-                    'quantity': itemQuantity
-                },
-                error: function(err) {
-                    console.log('Error status: ' + err.status + ' statusText: ' + err.statusText);
-                },
-                success: function(resp) {
-                    items.fetch();
-                    self.render();
-                }
-            });
+            if (this.formIsValid()) {
+                $.ajax({
+                    url: items.url,
+                    method: 'POST',
+                    headers: {'X-CSRFToken': this.getCookie('csrftoken')},
+                    data: {
+                        'name': itemName,
+                        'quantity': itemQuantity
+                    },
+                    error: function(err) {
+                        console.log('Error status: ' + err.status + ' statusText: ' + err.statusText);
+                    },
+                    success: function(resp) {
+                        items.fetch();
+                        self.render();
+                    }
+                });
+            }
+        },
+        formIsValid: function() {
+            var itemName = $('#itemName').val().trim();
+            var itemQuantity = $('#itemQuantity').val().trim();
+            var isValid = true;
+
+            if (itemName === '') {
+                var emptyName = new ErrorView('Please enter an item name.');
+                isValid = false;
+            }
+            if (itemQuantity === '') {
+                var emptyQuantity = new ErrorView('Please enter a quantity.');
+                isValid = false;
+            }
+            if (/[^\d]+/.test(itemQuantity)) {
+                var illegalQuantity = new ErrorView('Only whole numbers can be used for item quantities.');
+                isValid = false;
+            }
+            return isValid;
         }
     });
 
@@ -92,7 +115,7 @@ $(document).ready(function() {
         },
         render: function() {
             this.$el.empty();
-            
+
             if(this.collection.models.length > 0) {
                 var html = this.template();
                 this.$el.html(html);
@@ -139,6 +162,19 @@ $(document).ready(function() {
         },
         togglePurchased: function(event) {
             this.model.toggle();
+        }
+    });
+
+    var ErrorView = Backbone.View.extend({
+        tagName: 'p',
+        className: 'bg-warning',
+
+        initialize: function(text) {
+            this.render(text);
+        },
+        render: function(text) {
+            this.$el.html(text);
+            $('.error-msg-container').append(this.$el);
         }
     });
 
