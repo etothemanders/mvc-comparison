@@ -1,5 +1,5 @@
 <script type="text/template" id="shopping-list-form">
-    <form class="form-inline">
+    <form class="form-inline">{% csrf_token %}
         <div class="form-group">
             <label for="itemName">Item</label>
             <input type="text" class="form-control" id="itemName" placeholder="eggs">
