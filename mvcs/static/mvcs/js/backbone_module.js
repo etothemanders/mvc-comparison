@@ -75,7 +75,6 @@ $(document).ready(function() {
                     console.log('Error status: ' + err.status + ' statusText: ' + err.statusText);
                 },
                 success: function(resp) {
-                    console.log(resp);
                     items.fetch();
                     self.render();
                 }
@@ -88,17 +87,18 @@ $(document).ready(function() {
         template: _.template($('#shopping-list').html()),
 
         initialize: function() {
-            this.listenTo(this.collection, 'sync', this.render);
+            this.listenTo(this.collection, 'sync change', this.render);
 
         },
         render: function() {
+            this.$el.empty();
+            
             if(this.collection.models.length > 0) {
                 var html = this.template();
                 this.$el.html(html);
             }
 
             var $tableBody = $('.table-body');
-            $tableBody.empty();
 
             this.collection.each(function(model) {
                 var itemView = new ItemView({model: model});
@@ -131,7 +131,10 @@ $(document).ready(function() {
         },
         onDelete: function(event) {
             this.model.destroy({
-                headers: {'X-CSRFToken': form.getCookie('csrftoken')}
+                headers: {'X-CSRFToken': form.getCookie('csrftoken')},
+                success: function(resp) {
+                    items.fetch();
+                }
             });
         },
         togglePurchased: function(event) {
