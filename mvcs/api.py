@@ -19,8 +19,6 @@ def items(request, item_id=None):
         item = Item.objects.get(pk=data.get('id'))
         item.purchased = data.get('purchased')
         item.save()
-        # return HttpResponseRedirect('items/')
-        # import pdb; pdb.set_trace()
     data = [dict(item) for item in Item.objects.all().values('id', 'name', 'quantity', 'purchased')]
     return JsonResponse({'items': data})
     
