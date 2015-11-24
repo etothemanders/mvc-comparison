@@ -1,7 +1,12 @@
 {% extends 'mvcs/base.html' %}
+{% load staticfiles %}
 
 {% block title %}
     <title>Backbone</title>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'mvcs/css/backbone_style.css' %}" />
 {% endblock %}
 
 {% block js %}
