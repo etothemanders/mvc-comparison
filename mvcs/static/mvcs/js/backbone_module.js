@@ -136,13 +136,6 @@ $(document).ready(function() {
         },
         togglePurchased: function(event) {
             this.model.toggle();
-            // var currentState = this.model.get('purchased');
-            // var toggleMap = {
-            //     false: true,
-            //     true: false
-            // }
-            // var newState = toggleMap[currentState];
-            // this.model.set({'purchased': newState});
         }
     });
 
