@@ -1,0 +1,19 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Slideshow</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'mvcs/css/slideshow.css' %}" />
+  </head>
+  <body>
+    <section class="slideshow">
+      <img src="{% static 'mvcs/img/cat1.jpeg' %}" alt="cat1.jpeg"/>
+      <div class="controls">
+        <button id="previous">Prev</button>
+        <button id="next">Next</button>
+      </div>
+    </section>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="{% static 'mvcs/js/slideshow.js' %}"></script>
+  </body>
+</html>

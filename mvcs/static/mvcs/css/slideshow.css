@@ -1,0 +1,13 @@
+.slideshow img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.controls {
+  margin-left: 50%;
+}
+
+.controls button {
+  transform: translateX(-100%);
+}
