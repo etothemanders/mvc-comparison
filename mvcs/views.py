@@ -14,3 +14,7 @@ def backbone(request):
 
 def slideshow(request):
     return render(request, 'mvcs/slideshow.html')
+
+
+def angular_tut1(request):
+    return render(request, 'mvcs/angular_tut1.html')
