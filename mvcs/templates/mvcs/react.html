@@ -1,0 +1,27 @@
+{% extends 'mvcs/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    <title>React</title>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'mvcs/css/backbone_style.css' %}" />
+{% endblock %}
+
+{% block js %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.6/react.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.6/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+  <script type="text/babel" src="{% static 'mvcs/js/react_module.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+  <div class="row header">
+    <div class="col-xs-12">
+        <h1>React Shopping List</h1>
+    </div>
+  </div>
+  <div id="shopping-list-container">
+  </div>
+{% endblock %}

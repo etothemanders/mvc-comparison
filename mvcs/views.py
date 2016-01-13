@@ -18,3 +18,7 @@ def slideshow(request):
 
 def angular_tut1(request):
     return render(request, 'mvcs/angular_tut1.html')
+
+
+def react(request):
+    return render(request, 'mvcs/react.html')
