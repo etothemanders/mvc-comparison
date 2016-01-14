@@ -199,7 +199,7 @@ var ShoppingListContainer = React.createClass({
       dataType: "json",
       type: "PUT",
       headers: {"X-CSRFToken": this.getCsrfToken()},
-      data: '{"id": ' + id + ', "purchased": ' + purchased + '}',
+      data: JSON.stringify(item),
       success: function(data) {
         this.setState({data: data.items});
       }.bind(this),
