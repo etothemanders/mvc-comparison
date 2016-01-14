@@ -22,3 +22,7 @@ def angular_tut1(request):
 
 def react(request):
     return render(request, 'mvcs/react.html')
+
+
+def angular(request):
+    return render(request, 'mvcs/angular.html')

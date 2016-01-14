@@ -1,0 +1,28 @@
+{% extends 'mvcs/base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    <title>Angular</title>
+{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'mvcs/css/backbone_style.css' %}" />
+{% endblock %}
+
+{% block js %}
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script type="text/javascript" src="{% static 'mvcs/js/angular_app.js' %}"></script>
+  <script type="text/javascript" src="{% static 'mvcs/js/main.ctrl.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+  {% comment %}
+    Use the Django verbatim template tag to prevent template variable syntax collisions with Angular.
+  {% endcomment %}
+
+  {% verbatim %}
+    <section ng-app="app" ng-controller="MainController as main">
+    </section>
+  {% endverbatim %}
+
+{% endblock %}
